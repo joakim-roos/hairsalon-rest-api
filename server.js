@@ -10,8 +10,10 @@ const port = process.env.PORT || 8000;
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 server.use(jsonServer.defaults());
+
 const SECRET_KEY = '123456789'
-const expiresIn = '100000h'
+
+const expiresIn = '10000h'
 
 // Create a token from a payload 
 function createToken(payload) {
@@ -25,11 +27,12 @@ function verifyToken(token) {
 
 // Check if the user exists in database
 function isAuthenticated({ email, password }) {
+  console.log(userdb.users.findIndex(user => user.email === email && user.password === password) !== -1)
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
 // Register New User
-server.post('/auth/register', (req, res) => {
+/* server.post('/auth/register', (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
   const { email, password } = req.body;
@@ -71,7 +74,7 @@ server.post('/auth/register', (req, res) => {
   const access_token = createToken({ email, password })
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token })
-})
+}) */
 
 // Login to one of the users from ./users.json
 server.post('/auth/login', (req, res) => {

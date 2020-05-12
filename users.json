@@ -1,10 +1,9 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Joakim",
-      "email": "yokejono@email.com",
-      "password": "joakim"
+      "id": 2,
+      "email": "jocke@email.com",
+      "password": "jocke"
     }
   ]
 }
