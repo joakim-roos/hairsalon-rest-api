@@ -208,6 +208,21 @@
       "unit": "kr",
       "duration": "30 min",
       "availabletime": "12.00"
+    },
+    {
+      "email": "yokejono@email.com",
+      "password": "joakim",
+      "id": 12
+    },
+    {
+      "email": "yokejono@email.com",
+      "password": "joakim",
+      "id": 13
+    },
+    {
+      "email": "yokejono@email.com",
+      "password": "joakim",
+      "id": 14
     }
   ]
 }
