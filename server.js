@@ -2,10 +2,11 @@ const fs = require('fs')
 const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inlva2Vqb25vQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiam9ha2ltIiwiaWF0IjoxNTg5MzEwNDIxLCJleHAiOjE1ODkzMTQwMjF9.317jcu16L5EiYX_w2_gKxlOgMXyckAKhKUj7zJFbqVc
+
 const server = jsonServer.create()
 const router = jsonServer.router('./db.json')
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
+const port = process.env.PORT || 8000;
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 server.use(jsonServer.defaults());
@@ -115,6 +116,4 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 
 server.use(router)
 
-server.listen(8000, () => {
-  console.log('Run Auth API Server')
-})
+server.listen(port)
