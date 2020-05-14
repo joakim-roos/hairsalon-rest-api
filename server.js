@@ -31,6 +31,18 @@ function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
+// Filter by req.method
+server.all('*', function (req, res, next) {
+  if (req.method === 'PUT' || req.method === 'DELETE') {
+    const status = 403
+    const message = 'Forbidden'
+    res.status(status).json({ status, message })
+    // Forbidden
+  } else {
+    next() //Continue
+  }
+})
+
 // Register New User
 /* server.post('/auth/register', (req, res) => {
   console.log("register endpoint called; request body:");
@@ -76,6 +88,13 @@ function isAuthenticated({ email, password }) {
   res.status(200).json({ access_token })
 }) */
 
+//Forbid to use post on db.json 
+server.post('/salons', (req, res) => {
+  const status = 403
+  const message = 'Forbidden'
+  res.status(status).json({ status, message })
+})
+
 // Login to one of the users from ./users.json
 server.post('/auth/login', (req, res) => {
   console.log("login endpoint called; request body:");
@@ -118,5 +137,4 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 })
 
 server.use(router)
-
 server.listen(port)
