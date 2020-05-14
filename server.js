@@ -2,7 +2,6 @@ const fs = require('fs')
 const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
-
 const server = jsonServer.create()
 const router = jsonServer.router('./db.json')
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
@@ -31,16 +30,21 @@ function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
-// Filter by req.method
+// forbid PUT and DELETE on all routes
 server.all('*', function (req, res, next) {
   if (req.method === 'PUT' || req.method === 'DELETE') {
     const status = 403
     const message = 'Forbidden'
     res.status(status).json({ status, message })
-    // Forbidden
   } else {
-    next() //Continue
+    next()
   }
+})
+//Forbid to write to db
+server.post('/salons', (req, res) => {
+  const status = 403
+  const message = 'Forbidden'
+  res.status(status).json({ status, message })
 })
 
 // Register New User
@@ -88,12 +92,7 @@ server.all('*', function (req, res, next) {
   res.status(200).json({ access_token })
 }) */
 
-//Forbid to use post on db.json 
-server.post('/salons', (req, res) => {
-  const status = 403
-  const message = 'Forbidden'
-  res.status(status).json({ status, message })
-})
+
 
 // Login to one of the users from ./users.json
 server.post('/auth/login', (req, res) => {
