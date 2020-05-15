@@ -1,4 +1,6 @@
-# A Simple rest-api for a hairsalon :blue_heart:
+## A Simple rest-api for a hairsalon :blue_heart:
+
+A simple rest API built with json-server.
 
 This repo is deployed with heroku here:
 
@@ -11,23 +13,17 @@ https://simple-rest-api-for-hairsalon.herokuapp.com/
 Clone this repo:
 
 ```
-https://github.com/joakim-roos/hairsalon-rest-api.git
+git clone https://github.com/joakim-roos/hairsalon-rest-api.git
 ```
 
-Then:
+Install dependencies:
 
 ```
 npm install
 ```
 
-Then:
+To start the application in development mode:
 
 ```
-npm start
-```
-
-or
-
-```
-nodemon start
+npm start OR nodemon start
 ```
